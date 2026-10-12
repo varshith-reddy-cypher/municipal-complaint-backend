@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: municipal-complaint-system
+
+  # MySQL Database Configuration
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/municipal_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
+    username: ${SPRING_DATASOURCE_USERNAME:municipal_user}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+# Prioritization Algorithm Configuration (Section 6)
+# Priority Score (P) = (Base Severity * W1) + (Affected People * W2) + (Age in Hours * W3)
+prioritization:
+  weights:
+    w1-severity: 0.5
+    w2-affected: 0.3
+    w3-age: 0.2
+  hazard-boost: 50.0
+  recalculation-rate-ms: 300000 # Recalculates every 5 minutes
+
+# OpenAPI Swagger UI
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: method
+
+logging:
+  level:
+    com.municipal.system: INFO
+    org.springframework.web: INFO
