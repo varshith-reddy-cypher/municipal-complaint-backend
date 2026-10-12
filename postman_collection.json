@@ -1,0 +1,168 @@
+{
+  "info": {
+    "name": "Municipal Complaint Prioritization System API",
+    "description": "Postman Collection for College Project Demonstration conforming to PDF Specification",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Submit Complaint (POST /api/complaints)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Live Electric Wire Dangling on Footpath\",\n  \"description\": \"Storm damaged overhead power line, sparking dangerously near bus stop.\",\n  \"citizenId\": 1,\n  \"departmentId\": 3,\n  \"zoneId\": \"ZONE-NORTH\",\n  \"latitude\": 12.9750,\n  \"longitude\": 77.5990,\n  \"photoUrl\": \"https://example.com/sparking-wire.jpg\",\n  \"severityLevel\": 5,\n  \"affectedCount\": 30,\n  \"isCriticalHazard\": true\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/complaints",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "complaints"]
+        }
+      }
+    },
+    {
+      "name": "2. Fetch Priority Queue (GET /api/complaints/priority)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/priority?onlyActive=true",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "complaints", "priority"],
+          "query": [
+            {
+              "key": "onlyActive",
+              "value": "true"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "3. Assign to Officer (PUT /api/complaints/{id}/assign)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"officerId\": 4,\n  \"notes\": \"Urgent inspection dispatched to electrical emergency response unit\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/1/assign",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "complaints", "1", "assign"]
+        }
+      }
+    },
+    {
+      "name": "4. Smart Auto-Dispatch (POST /api/complaints/{id}/auto-dispatch)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/2/auto-dispatch",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "complaints", "2", "auto-dispatch"]
+        }
+      }
+    },
+    {
+      "name": "5. Update Resolution Stage (PATCH /api/complaints/{id}/status)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"RESOLVED\",\n  \"remarks\": \"Pipeline welded, leak arrested, water flow normalized.\",\n  \"photoUrl\": \"https://example.com/resolved-pipeline.jpg\",\n  \"updatedByUserId\": 4\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/1/status",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "complaints", "1", "status"]
+        }
+      }
+    },
+    {
+      "name": "6. Citizen Upvote (POST /api/complaints/{id}/upvote)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/2/upvote",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "complaints", "2", "upvote"]
+        }
+      }
+    },
+    {
+      "name": "7. Zone Analytics Stats (GET /api/reports/analytics)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/reports/analytics",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "reports", "analytics"]
+        }
+      }
+    },
+    {
+      "name": "8. Overall Municipal Summary (GET /api/reports/summary)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/reports/summary",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "reports", "summary"]
+        }
+      }
+    },
+    {
+      "name": "9. Complaint Audit Timeline (GET /api/complaints/{id}/timeline)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/1/timeline",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "complaints", "1", "timeline"]
+        }
+      }
+    }
+  ]
+}
